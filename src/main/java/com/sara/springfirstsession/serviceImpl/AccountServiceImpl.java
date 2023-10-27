@@ -18,4 +18,9 @@ public class AccountServiceImpl implements AccountService {
     public Account createAccount(Account account) throws Exception {
         return accountRepository.save(account);
     }
+
+    @Override
+    public Account findOneAccount(Long id) throws Exception {
+        return accountRepository.findById(id).orElseThrow(()->new Exception("Not Found Id!!!"));
+    }
 }
