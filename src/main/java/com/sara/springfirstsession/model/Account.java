@@ -2,6 +2,7 @@ package com.sara.springfirstsession.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sara.springfirstsession.dto.AccountDto;
 import com.sara.springfirstsession.enums.AccountTypes;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,4 +58,18 @@ public class Account {
     @ManyToOne(fetch = FetchType.EAGER , targetEntity = Person.class)
     @JoinColumn(name = "person_Id" , foreignKey = @ForeignKey(name = "fk_person_Id"))
     private Person personId;
+
+    public Account fromAccountDto(AccountDto accountDto){
+
+        Account account = new Account();
+        account.setAccountNumber(accountDto.getAccountNumber());
+        account.setBalance(accountDto.getBalance());
+        account.setInterestRate(accountDto.getInterestRate());
+        account.setInterest(accountDto.getInterest());
+        account.setAccountTypes(accountDto.getAccountTypes());
+        account.setCreatedAt(accountDto.getCreatedAt());
+        account.setPersonId(accountDto.getPersonId());
+        return account;
+
+    }
 }
