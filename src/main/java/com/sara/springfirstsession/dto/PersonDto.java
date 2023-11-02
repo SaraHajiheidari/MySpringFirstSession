@@ -30,7 +30,6 @@ public class PersonDto {    //Data Transfer Objekt
         personDto.setFirstName(person.getFirstName());
         personDto.setLastName(person.getLastName());
         personDto.setMobile(person.getMobile());
-        personDto.setId(person.getId());
         personDto.setEmailAddress(person.getEmailAddress());
 
         return  personDto;

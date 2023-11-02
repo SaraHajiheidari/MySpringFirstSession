@@ -36,7 +36,6 @@ public class Person {
     public Person fromDto(PersonDto personDto){
 
         Person person = new Person();
-        person.setId(personDto.getId());
         person.setMobile(personDto.getMobile());
         person.setFirstName(personDto.getFirstName());
         person.setLastName(personDto.getLastName());
