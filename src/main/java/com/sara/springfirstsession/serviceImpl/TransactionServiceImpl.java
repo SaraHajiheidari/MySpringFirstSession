@@ -73,6 +73,32 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Long depositMoney(TransactionDto transactionDto) throws Exception {
-        return null;
+           Account account = accountRepository.findAccountByAccountNumber(transactionDto.getToAccount()); // kolle objekt ro peyda mikone
+           if(account == null) {
+               throw  new Exception("Account Number hat nicht gefunden!!!");
+           }
+           if(transactionDto.getDepositAmountMoney() == null){
+               throw new Exception("Euro muss eingetragen werden");
+           }
+           if(transactionDto.getDepositAmountMoney() < 5){
+               throw new Exception("Betrag ist nicht gültig");
+           }
+           Transaction transaction = new Transaction();
+           Date date = new Date();
+           try{
+               Integer accountBalance = account.getBalance(); // mojodi ro miporse line 76
+               accountBalance += transactionDto.getDepositAmountMoney();
+               transaction.setDepositAmountMoney(transactionDto.getDepositAmountMoney());
+               transaction.setTransactionDate(date);
+               transaction.setToAccount(account.getAccountNumber());
+               account.setBalance(accountBalance);
+               accountRepository.save(account);
+               transactionRepository.save(transaction);
+           }
+           catch (Exception e){
+               throw new Exception("Konto ist nicht gültig");
+           }
+           return transaction.getId();
+
     }
 }

@@ -33,5 +33,15 @@ public class TransactionController {
         }
     }
 
+    @PostMapping(value = "deposit")
+    public ResponseEntity deposit(@RequestBody TransactionDto transactionDto) throws Exception{
+        try{
+            return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.depositMoney(transactionDto));
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Fehler auf Transaction!!!");
+        }
+    }
+
 
 }
