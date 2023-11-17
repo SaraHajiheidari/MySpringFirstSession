@@ -43,5 +43,15 @@ public class TransactionController {
         }
     }
 
+    @PostMapping(value = "withdraw")
+    public ResponseEntity withdraw(@RequestBody TransactionDto transactionDto) throws Exception{
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.withdrawMoney(transactionDto));
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Fehler auf Transaction!!!");
+        }
+    }
+
 
 }

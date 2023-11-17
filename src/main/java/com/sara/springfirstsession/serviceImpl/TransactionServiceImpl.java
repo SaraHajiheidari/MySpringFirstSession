@@ -66,7 +66,37 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Long withdrawMoney(TransactionDto transactionDto) throws Exception {
-        return null;
+        Account account = accountRepository.findAccountByAccountNumber(transactionDto.getFromAccount());
+        Date date = new Date();
+        Transaction transaction = new Transaction();
+
+        if(account == null){
+            throw new Exception("account ist nicht gültig !");
+        }
+        if(transactionDto.getWithdrawAmountMoney() == null){
+            throw new Exception("money ist nicht eingetragen !");
+        }
+        if(account.getBalance() > transactionDto.getWithdrawAmountMoney())
+            try {
+
+
+                Integer fromAccountBalance =account.getBalance();
+                fromAccountBalance -= transactionDto.getWithdrawAmountMoney();
+
+                transaction.setTransactionDate(date);
+                transaction.setFromAccount(transactionDto.getFromAccount());
+
+                transaction.setWithdrawAmountMoney(transactionDto.getWithdrawAmountMoney());
+                account.setBalance(fromAccountBalance);
+                transactionRepository.save(transaction);
+                accountRepository.save(account);
+
+            }catch (Exception e){
+                throw new Exception("balance reicht nicht!!!");
+            }
+
+        System.out.println("transaction war erfolgreich.");
+        return transaction.getId();
     }
 
 
