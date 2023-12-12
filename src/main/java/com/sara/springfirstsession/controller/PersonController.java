@@ -62,5 +62,11 @@ public class PersonController {
     public Person searchByEmail(@PathVariable String email) throws Exception{
         return personService.searchByEmail(email);
         }
+
+        @GetMapping(value = "findByLastName/{lastName}")
+        @ResponseBody
+    public ResponseEntity<Person> findByLastName(@PathVariable String lastName) throws Exception{
+        return   new ResponseEntity<> (personService.findByLastName(lastName) , HttpStatus.OK);
+        }
 }
 

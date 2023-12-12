@@ -97,4 +97,9 @@ private PersonRepository personRepository;
     public Person searchByEmail(String email) throws Exception {
         return personRepository.searchByEmail(email);
     }
+
+    @Override
+    public Person findByLastName(String lastName) throws Exception {
+        return personRepository.findByLastName(lastName);
+    }
 }

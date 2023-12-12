@@ -20,4 +20,6 @@ public interface PersonService {
     Person savePersonDto(PersonDto personDto) throws Exception;
 
     Person searchByEmail(String email) throws Exception;
+
+    Person findByLastName(String lastName) throws  Exception;
 }

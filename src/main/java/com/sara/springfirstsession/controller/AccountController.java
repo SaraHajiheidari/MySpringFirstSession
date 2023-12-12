@@ -30,4 +30,9 @@ public class AccountController {
         return new ResponseEntity<>(accountService.findOneAccount(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "account-by-balance/{balance}")
+    public ResponseEntity<Account> findByBalance(@PathVariable Integer balance) throws Exception{
+        return new ResponseEntity<>(accountService.findAccountByBalance(balance) ,HttpStatus.OK);
+    }
+
 }
